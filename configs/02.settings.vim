@@ -3,6 +3,7 @@ let mapleader = "\<Space>"
 
 " Theme
 colorscheme dracula
+set background=dark
 
 " Indent
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -47,6 +48,35 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme='dracula'
 
+" Auto close tag
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.vue'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:jsx_ext_required = 0
+
+" Nerd commenter
+let g:NERDCreateDefaultMappings = 1 " Create default mappings
+let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
+let g:NERDDefaultAlign = 'left' " Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDAltDelims_c = 1 " Set a language to use its alternate delimiters by default
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+" Nerdtree git plugin
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
 " ===================== Mapping =======================
 " Prevent use arrow key when move
 nnoremap <Left> :echoe "Use h"<CR>
@@ -54,8 +84,14 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" Remove highlight -> Ctrl + h
-map <C-h> :nohl<CR>
+" Move between buffers
+noremap <C-k> :wincmd k<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-h> :wincmd h<CR>
+noremap <C-l> :wincmd l<CR>
+
+" Remove highlight 
+nnoremap <leader>h :nohl<CR>
 
 " Nerdtree
 nnoremap <C-b> :NERDTreeToggle<CR>
@@ -64,6 +100,7 @@ autocmd VimEnter * NERDTree " Start NERDTree and leave the cursor in it.
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeMinimalUI=1
 
 " Split windows
 nnoremap <leader>\ :vsplit<CR>
@@ -73,3 +110,10 @@ nnoremap <leader>/ :split<CR>
 nnoremap <C-w> :x<CR>
 nnoremap <C-s> :w<CR>
 nnoremap <C-z> u
+
+" Automatic closing brackets
+inoremap ' ''<left>
+inoremap " ""<left>
+inoremap { {}<left>
+inoremap [ []<left>
+inoremap ( ()<left>
